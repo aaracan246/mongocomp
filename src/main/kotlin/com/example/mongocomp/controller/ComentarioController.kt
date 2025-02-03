@@ -51,7 +51,7 @@ class ComentarioController {
             NotFoundException("No se ha encontrado una noticia con ese ID. ID: $id.")
         }
 
-        val updatedComentarios = noticia.comentarios.filterNot { it._id?.toString() == comentarioId } // Filtra dejando fuera lo que cumpla el filtro
+        val updatedComentarios = noticia.comentarios.filterNot { it._id?.toString() == comentarioId } // Filtra dejando fuera lo que cumpla el filtro, manteniendo el resto de comentarios
         val updatedNoticia = noticia.copy(comentarios = updatedComentarios)
 
         return noticiasRepository.save(updatedNoticia)

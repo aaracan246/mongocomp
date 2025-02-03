@@ -3,7 +3,7 @@ package com.example.mongocomp.model
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 
-@Document
+@Document(collection = "collDireccion")
 data class Direccion(
     @Field
     val calle: String,

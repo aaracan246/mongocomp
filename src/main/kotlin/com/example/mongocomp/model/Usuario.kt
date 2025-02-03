@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 @Document(collection = "collUsuarios")
 data class Usuario(
     @Id
-    val _id: ObjectId,
+    val _id: ObjectId?,
     @Field
     val nick: String,
     @Field

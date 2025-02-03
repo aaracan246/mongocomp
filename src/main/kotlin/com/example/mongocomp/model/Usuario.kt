@@ -14,7 +14,7 @@ data class Usuario(
     @Field
     val estado: Boolean,
     @Field
-    val direccion: String,
+    val direccion: Direccion,
     @Field
     val tlfn: String
 )

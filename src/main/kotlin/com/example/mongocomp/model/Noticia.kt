@@ -19,5 +19,7 @@ data class Noticia(
     @Field
     val tags: List<String>,
     @Field
-    val usuario: String
+    val usuario: String,
+    @Field
+    val comentarios: List<Comentario> = listOf()
     )

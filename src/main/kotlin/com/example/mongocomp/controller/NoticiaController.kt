@@ -3,6 +3,7 @@ package com.example.mongocomp.controller
 import com.example.mongocomp.error.exception.NotFoundException
 import com.example.mongocomp.model.Noticia
 import com.example.mongocomp.repository.NoticiasRepository
+import com.example.mongocomp.repository.UsuarioRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.mongodb.core.aggregation.BooleanOperators.Not
 import org.springframework.web.bind.annotation.*
@@ -15,15 +16,19 @@ class NoticiaController{
     @Autowired
     private lateinit var noticiasRepository: NoticiasRepository
 
+    @Autowired
+    private lateinit var usuarioRepository: UsuarioRepository
 
     @PostMapping("/noticia")
     fun postNoticia(
         @RequestBody newNoticia: Noticia
     ): Noticia{
 
-        val noticia = noticiasRepository.insert(newNoticia)
+        val usuario = usuarioRepository.findById(newNoticia.usuario).orElseThrow() { NotFoundException("Parece que aún no hay noticias.") }
 
-        return noticia
+        if (!usuario.estado){ throw IllegalStateException("El usuario ${usuario.nick} está baneado.")}
+
+        return noticiasRepository.insert(newNoticia)
     }
 
     @GetMapping("/noticias")
